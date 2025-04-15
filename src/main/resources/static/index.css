@@ -1,0 +1,134 @@
+:root {
+  --menu-height: 60px;
+  --link-color: rgb(255, 208, 154);
+  --background-color: rgb(150, 0, 0);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  scroll-behavior: smooth;
+}
+
+.content-width {
+  width: 80%;
+}
+
+.hero {
+  width: 100%;
+  background-image: url(/jam.jpg);
+  background-size: contain;
+  background-position: left;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 470px) {
+  .hero {
+    display: none;
+  }
+}
+
+.text-container {
+  margin: 0px auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 50px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 720px) {
+  .text-container {
+    font-size: 30px;
+  }
+}
+
+.welcome {
+  line-height: 50px;
+  margin: 0 15px;
+}
+
+@media (max-width: 720px) {
+  .welcome,
+  .job,
+  .application,
+  .management {
+    line-height: 30px;
+    margin: 0 15px;
+  }
+}
+
+.navigation {
+  width: 100%;
+  height: var(--menu-height);
+  background: var(--background-color);
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 720px) {
+  .navigation {
+    display: block;
+  }
+}
+.menu-content {
+  /*  border: 1px solid black;*/
+  font-size: 32px;
+  font-weight: bold;
+  line-height: var(--menu-height);
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .menu-content {
+    background: var(--background-color);
+    width: 190px;
+    height: 200px;
+    position: relative;
+    left: 0px;
+    top: 25px;
+    flex-direction: column;
+    display: none;
+  }
+}
+
+.menu-content a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.menu-content a:hover {
+  color: rgb(206, 133, 50);
+}
+
+.hamburger-container {
+  position: relative;
+  height: 32px;
+  top: 14px;
+  left: 10px;
+  display: none;
+  /*  border: 2px solid black;*/
+}
+
+@media (max-width: 720px) {
+  .hamburger-container {
+    display: flex;
+  }
+}
+
+.hamburger {
+  fill: var(--link-color);
+  width: 100%;
+  height: 100%;
+}
+
+.content-container {
+  margin: 0px auto;
+  display: flex;
+  /*  height: 50vh;*/
+}

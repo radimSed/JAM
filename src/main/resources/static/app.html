@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/app.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 class="h1">Application</h1>
+    <div class="buttons">
+      <button class="button" id="createBtn">Create</button>
+    </div>
+    <hr />
+    <div class="inputs">
+      <div>
+        <label for="idInput" class="label">Application Id</label>
+        <input id="idInput" type="number" class="input" min="0" />
+      </div>
+      <div>
+        <label for="titleInput" class="label">Title</label>
+        <input id="titleInput" type="text" class="input" />
+      </div>
+      <div>
+        <label for="posIdInput" class="label">Position Id</label>
+        <input id="posIdInput" type="text" class="input" />
+      </div>
+      <div>
+        <label for="compNameInput" class="label">Company</label>
+        <input id="compNameInput" type="text" class="input" />
+      </div>
+      <div>
+        <label for="personNameInput" class="label">Person</label>
+        <input id="personNameInput" type="text" class="input" />
+      </div>
+      <div>
+        <label for="statusSel" class="label">Status</label>
+        <select id="statusSel">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="button" id="listBtn">List</button>
+    </div>
+    <hr />
+    <div id="results">
+      <div id="info"></div>
+      <div id="cardsContainer"></div>
+    </div>
+
+    <!--modal dialog for application create/update/delete-->
+    <div id="modalDialog">
+      <div id="modalContent">
+        <span id="close">&times;</span>
+        <h2>Application details</h2>
+        <div class="modalAppSection">
+          <div>
+            <label for="modalIdInput" class="label">Application Id</label>
+            <input
+              id="modalIdInput"
+              type="number"
+              class="input"
+              min="0"
+              disabled
+            />
+          </div>
+          <div>
+            <label for="modalTitleInput" class="label">Title</label>
+            <input id="modalTitleInput" type="text" class="input" />
+          </div>
+          <div>
+            <label for="modalPosIdInput" class="label">Position Id</label>
+            <input id="modalPosIdInput" type="text" class="input" />
+          </div>
+          <div>
+            <label for="modalStartDateInput" class="label">Start date</label>
+            <input
+              id="modalStartDateInput"
+              type="datetime"
+              class="input"
+              disabled
+            />
+          </div>
+          <div>
+            <label for="modalLastDateInput" class="label">Last change</label>
+            <input
+              id="modalLastDateInput"
+              type="datetime"
+              class="input"
+              disabled
+            />
+          </div>
+          <div>
+            <label for="modalStatusInput" class="label">Status</label>
+            <select id="modalStatusInput" type="text" class="input"></select>
+          </div>
+        </div>
+        <hr />
+        <h3>Person</h3>
+        <div class="modalPersSection">
+          <div>
+            <label for="modalPersonIdInput" class="label">Person Id</label>
+            <input id="modalPersonIdInput" type="text" class="input" disabled />
+          </div>
+          <div>
+            <label for="modalPersonNameInput" class="label">Name</label>
+            <input
+              id="modalPersonNameInput"
+              type="text"
+              class="input"
+              disabled
+            />
+          </div>
+          <div>
+            <label for="modalPersonEmailInput" class="label">E-mail</label>
+            <input
+              id="modalPersonEmailInput"
+              type="text"
+              class="input"
+              disabled
+            />
+          </div>
+          <div>
+            <label for="modalPersonPhoneInput" class="label">Phone</label>
+            <input
+              id="modalPersonPhoneInput"
+              type="text"
+              class="input"
+              disabled
+            />
+          </div>
+          <div class="buttons">
+            <button class="button" id="modalPersEditBtn">Change person</button>
+          </div>
+        </div>
+        <hr />
+        <h3>Company</h3>
+        <div class="modalCompSection">
+          <div>
+            <label for="modalCompanyIdInput" class="label">Company Id</label>
+            <input
+              id="modalCompanyIdInput"
+              type="text"
+              class="input"
+              disabled
+            />
+          </div>
+          <div>
+            <label for="modalCompNameInput" class="label">Name</label>
+            <input id="modalCompNameInput" type="text" class="input" disabled />
+          </div>
+          <div class="buttons">
+            <button class="button" id="modalCompEditBtn">Change company</button>
+          </div>
+        </div>
+        <hr />
+        <div class="modalNotesSection">
+          <textarea name="textArea" id="textArea" disabled></textarea>
+          <div class="buttons">
+            <button class="button" id="modalNoteEditBtn">Add record</button>
+          </div>
+        </div>
+        <hr id="modalHorizontalLine1" />
+        <div class="buttons" id="modalButton">
+          <button class="button" id="modalEditBtn">Update</button>
+          <button class="button" id="modalCreateBtn">Create</button>
+          <button class="button" id="modalDeleteBtn">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <!--modal dialog for company selection-->
+    <div id="compSelection">
+      <div id="compModalContent">
+        <span id="compSelClose">&times;</span>
+
+        <h1 class="h1">Company</h1>
+        <div class="inputs">
+          <div>
+            <label for="idCompInput" class="label">Company Id</label>
+            <input id="idCompInput" type="number" class="input" min="0" />
+          </div>
+          <div>
+            <label for="compNameInput" class="label">Company Name</label>
+            <input id="compNnameInput" type="text" class="input" />
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="button" id="compListBtn">List</button>
+        </div>
+        <hr />
+        <div id="compResults">
+          <div id="compInfo"></div>
+          <div id="compCardsContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <!--modal dialog for person selection-->
+    <div id="persSelection">
+      <div id="persModalContent">
+        <span id="persSelClose">&times;</span>
+
+        <h1 class="h1">Person</h1>
+        <div class="inputs">
+          <div>
+            <label for="persIdInput" class="label">Id</label>
+            <input id="persIdInput" type="number" class="input" min="0" />
+          </div>
+          <div>
+            <label for="persNameInput" class="label">Name</label>
+            <input id="persNameInput" type="text" class="input" />
+          </div>
+          <div>
+            <label for="emailInput" class="label">E-mail</label>
+            <input id="emailInput" type="email" class="input" />
+          </div>
+          <div>
+            <label for="phoneInput" class="label">Phone</label>
+            <input id="phoneInput" type="tel" class="input" />
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="button" id="persListBtn">List</button>
+        </div>
+        <hr />
+        <div id="persResults">
+          <div id="persInfo"></div>
+          <div id="persCardsContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <!--modal dialog for records-->
+    <div id="modalRecord">
+      <div id="modalRecordContent">
+        <span id="modalRecClose">&times;</span>
+        <textarea name="textArea" id="modalTextArea"></textarea>
+
+        <div class="inputs"></div>
+        <div class="buttons">
+          <button class="button" id="modalRecBtn">Update</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

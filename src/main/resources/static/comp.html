@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/comp.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 class="h1">Company</h1>
+    <div class="buttons">
+      <button class="button" id="createBtn">Create</button>
+    </div>
+    <hr />
+    <div class="inputs">
+      <div>
+        <label for="idInput" class="label">Company Id</label>
+        <input id="idInput" type="number" class="input" min="0" />
+      </div>
+      <div>
+        <label for="nameInput" class="label">Company Name</label>
+        <input id="nameInput" type="text" class="input" />
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="button" id="listBtn">List</button>
+    </div>
+    <hr />
+    <div id="results">
+      <div id="info"></div>
+      <div id="cardsContainer"></div>
+    </div>
+
+    <div id="modalDialog">
+      <div id="modalContent">
+        <span id="close">&times;</span>
+        <p>Edit name of the company</p>
+        <div id="modalId">
+          <label for="modalIdInput" class="label">Company Id</label>
+          <input
+            id="modalIdInput"
+            type="number"
+            min="1"
+            class="input"
+            disabled
+          />
+        </div>
+        <div id="modalName">
+          <label for="modalNameInput" class="label">Company Name</label>
+          <input id="modalNameInput" type="text" class="input" />
+        </div>
+        <div class="buttons" id="modalButton">
+          <button class="button" id="modalEditBtn">Update</button>
+          <button class="button" id="modalCreateBtn">Create</button>
+          <button class="button" id="modalDeleteBtn">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/comp.js"></script>
+  </body>
+</html>

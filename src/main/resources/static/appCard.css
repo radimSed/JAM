@@ -1,0 +1,77 @@
+:root {
+  --default-margin: 5px;
+  --default-padding: 5px 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: 0.2s;
+}
+
+.card {
+  font-family: "roboto", sans-serif;
+  width: 90%;
+  margin: 10px auto;
+  border: 1px solid black;
+  border-radius: 5px;
+  background: linear-gradient(#dfdfdf, white, #dfdfdf);
+  box-shadow: 5px 5px 5px gray;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  box-shadow: 5px 5px 5px 5px gray;
+}
+
+.card:active {
+  transform: scale(1);
+}
+
+.appId {
+  flex: 1;
+  text-align: center;
+  margin: var(--default-margin);
+  padding: var(--default-padding);
+}
+
+.appTitle {
+  flex: 8;
+  text-align: center;
+  text-wrap: wrap;
+  margin: var(--default-margin);
+  padding: var(--default-padding);
+}
+
+.positionId {
+  flex: 2;
+  text-align: center;
+  margin: var(--default-margin);
+  padding: var(--default-padding);
+}
+
+.appCompany {
+  flex: 2;
+  text-align: center;
+  margin: var(--default-margin);
+  padding: var(--default-padding);
+}
+
+.appPerson {
+  flex: 2;
+  text-align: center;
+  margin: var(--default-margin);
+  padding: var(--default-padding);
+}
+
+.appStatus {
+  flex: 2;
+  text-align: center;
+  margin: var(--default-margin);
+  padding: var(--default-padding);
+}
