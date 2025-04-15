@@ -1,0 +1,294 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.h1 {
+  margin: 10px;
+  font-weight: bold;
+}
+
+.inputs {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  line-height: 30px;
+  column-gap: 20px;
+}
+
+#idInput {
+  width: 50px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.button {
+  width: 120px;
+  margin: 0px 10px;
+  padding: 10px 20px;
+  background: rgb(150, 0, 0);
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 20px;
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+#info {
+  width: 90%;
+  margin: 10px auto;
+}
+
+#cardsContainer {
+  width: 90%;
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cardDiv {
+  flex: 1;
+}
+
+#modalDialog {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 1; /* on top of everything */
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+#modalContent {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+#close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#close:hover,
+#close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#modalId {
+  padding: 10px 0;
+}
+
+#modalName {
+  margin-bottom: 10px;
+}
+
+#modalIdInput {
+  width: 50px;
+}
+
+#modalButton {
+  display: flex;
+  padding: 10px;
+  margin: 0px auto;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.modalAppSection {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  line-height: 30px;
+  column-gap: 20px;
+}
+
+.modalPersSection {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  line-height: 30px;
+  column-gap: 20px;
+}
+
+.modalCompSection {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  line-height: 30px;
+  column-gap: 20px;
+}
+
+.modalNotesSection {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  line-height: 30px;
+  column-gap: 20px;
+}
+
+#modalPersEditBtn {
+  width: 180px;
+}
+
+#modalCompEditBtn {
+  width: 200px;
+}
+
+#textArea {
+  width: 50%;
+  height: 250px;
+  margin-bottom: 10px;
+}
+
+#modalNoteEditBtn {
+  width: 150px;
+  height: 44px;
+}
+
+/**********************************************************************************************************
+/* section for modalDialog for company selection*/
+#compSelection {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 2; /* on top of everything */
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+#compModalContent {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  min-height: 80%;
+}
+
+/* The Close Button */
+#compSelClose {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#compSelClose:hover,
+#compSelClose:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/************************************************************************************************************
+/* section for modalDialog for person selection*/
+#persSelection {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 2; /* on top of everything */
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+#persModalContent {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  min-height: 80%;
+}
+
+/* The Close Button */
+#persSelClose {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#persSelClose:hover,
+#persSelClose:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+/************************************************************************************************************
+/* section for modalDialog for records*/
+#modalRecord {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 2; /* on top of everything */
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+#modalRecordContent {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  /*height: 80%;*/
+}
+
+/* The Close Button */
+#modalRecClose {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#modalRecClose:hover,
+#modalRecClose:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#modalTextArea {
+  width: 90%;
+  height: 250px;
+  margin-bottom: 10px;
+}
