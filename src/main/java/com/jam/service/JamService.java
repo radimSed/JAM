@@ -39,55 +39,36 @@ public class JamService {
             System.err.println("***************************************************************************************");
         }
 
-        setAutoclose();
+        setAutocloseDate();
     }
 
     /**
-     * sets all application with "Open" status and "lastInteractionDate" older then 30 days
+     * sets all application with "Open" status and "lastInteractionDate" older then AUTOCLOSEDAYS days
      * to "Autoclosed" state
      */
-    private void setAutoclose(){
-        autoclose(getAppOlderThan30Days());
-    }
-
-    private List<Application> getAppOlderThan30Days(){
+    private void setAutocloseDate(){
         LocalDateTime date = LocalDateTime.now().minusDays(AUTOCLOSEDAYS);
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Application> criteria = builder.createQuery(Application.class);
-        Root<Application> root = criteria.from(Application.class);
-        criteria.select(root);
-
-        List<Predicate> predicates = new ArrayList<>();
-        Predicate status = builder.equal(root.get(Application_.statusId), 1); //open status
-        predicates.add(status);
-        Predicate datePre = builder.lessThan(root.get(Application_.lastInteractionDate), date);
-        predicates.add(datePre);
-        criteria.where(predicates.toArray(new Predicate[]{}));
-
-        return entityManager.createQuery(criteria).getResultList();
-    }
-
-    private void autoclose(List<Application> appToAutoclose){
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         EntityTransaction transaction = entityManager.getTransaction();
 
-        //create update
-        CriteriaUpdate<Application> update = builder.createCriteriaUpdate(Application.class);
-        //set the root class
-        Root<Application> root = update.from(Application.class);
+        int updateCount = 0;
         try {
             transaction.begin();
-            for(Application app: appToAutoclose) {
-                update.set(root.get(Application_.lastInteractionDate), LocalDateTime.now());
-                update.set(root.get(Application_.statusId), 3);
-                update.where(builder.equal(root.get(Application_.applicationId), app.getApplicationId()));
-                entityManager.createQuery(update).executeUpdate();
-            }
+            updateCount = entityManager.createQuery("""
+                            update Application
+                                set
+                                    lastInteractionDate = :currentDate,
+                                    statusId = :newStatus
+                                where
+                                    statusId = :oldStatus and
+                                    lastInteractionDate <= :idleDate
+                            """)
+                    .setParameter("newStatus", 3)
+                    .setParameter("oldStatus", 1)
+                    .setParameter("idleDate", date)
+                    .setParameter("currentDate", LocalDateTime.now())
+                    .executeUpdate();
             transaction.commit();
-            System.out.println(appToAutoclose.size() + " applications autoclosed");
         } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
@@ -96,6 +77,7 @@ public class JamService {
         } finally {
             entityManager.close();
         }
+        System.out.println(updateCount + " applications autoclosed");
     }
 
     public String testService(){
@@ -174,11 +156,11 @@ public class JamService {
 
         List<Predicate> predicates = new ArrayList<>();
         if(id != 0) {
-            Predicate idLike = builder.like(root.<Integer>get("id").as(String.class), "%" + id + "%");
+            Predicate idLike = builder.like(root.<Integer>get(Company_.id).as(String.class), "%" + id + "%");
             predicates.add(idLike);
         }
         if (!name.isEmpty()) {
-            Predicate nameLike = builder.like(root.get("name"), "%"+name+"%");
+            Predicate nameLike = builder.like(root.get(Company_.name), "%"+name+"%");
             predicates.add(nameLike);
         }
         criteria.where(predicates.toArray(new Predicate[]{}));
