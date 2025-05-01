@@ -2,30 +2,37 @@ package com.jam;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
 
 @SpringBootApplication
 public class JamApplication {
 
+	private static final String URL = "http://localhost:8080/JAM/";
+
 	public static void main(String[] args) {
-		SpringApplication.run(JamApplication.class, args);
-	}
+		ConfigurableApplicationContext ctx = SpringApplication.run(JamApplication.class, args);
 
-	@EventListener({ApplicationReadyEvent.class})
-	void applicationReadyEvent() {
-		System.out.println("Application started ... launching browser now");
-		browse("http://localhost:8080/JAM/");
-	}
+		String browser = ctx.getEnvironment().getProperty("browser");
+		String incognito = ctx.getEnvironment().getProperty("incognito.parameter");
 
-	public static void browse(String url) {
 		Runtime runtime = Runtime.getRuntime();
 		try {
-			runtime.exec("/opt/google/chrome/chrome " + url + " -incognito");
+			if(browser.toLowerCase().contains("chrome")){ //if chrome is set
+				runtime.exec(browser + " " + URL + " " + incognito);
+			} else if(browser.toLowerCase().contains("firefox")) { //if firefox is set
+				runtime.exec(browser + " " + incognito + " " + URL);
+			} else {
+				System.err.println("**************************************************************************************************");
+				System.err.println("* Unable to run browser. Run it manually and enter address " + URL + ". *");
+				System.err.println("**************************************************************************************************");
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 }
+
+
