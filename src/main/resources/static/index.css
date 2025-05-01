@@ -52,10 +52,7 @@
 }
 
 @media (max-width: 720px) {
-  .welcome,
-  .job,
-  .application,
-  .management {
+  .welcome {
     line-height: 30px;
     margin: 0 15px;
   }

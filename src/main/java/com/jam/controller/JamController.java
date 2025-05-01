@@ -4,6 +4,8 @@ import com.jam.dto.*;
 import com.jam.exceptions.NotFoundException;
 import com.jam.service.JamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -205,5 +207,4 @@ public ResponseEntity<List<AppCard>> getPersonList(
         List<StatusValue> statusList = jamService.getStatusList();
         return new ResponseEntity<>(statusList, HttpStatus.OK);
     }
-
 }
