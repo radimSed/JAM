@@ -24,12 +24,10 @@ public class JamControllerV1 {
     @Autowired
     JamServiceV1 jamService;
 
-    private final String compCardTemplate;
     private final String personCardTemplate;
     private final String appCardTemplate;
 
     public JamControllerV1(){
-        compCardTemplate = getResource("templates/compCard.html"); //reads template for company card
         personCardTemplate = getResource("templates/personCard.html"); //reads template for person card
         appCardTemplate = getResource("templates/appCard.html"); //reads template for app card
     }
@@ -70,40 +68,6 @@ public class JamControllerV1 {
     }
 
 //*********************** Company related methods ************************************************
-    @GetMapping("comp")
-    @ResponseBody
-    public ResponseEntity<List<CompanyCard>> getCompList(
-            @RequestParam(value = "id") int id,
-            @RequestParam(value = "name") String name
-            ){
-        List<Company> complist = jamService.getCompanies(id, name);
-
-        List<CompanyCard> compCards = new ArrayList<>();
-        for(Company company:complist){
-            String s1 = compCardTemplate.replace("+id+", String.valueOf(company.getId()));
-            String s2 = s1.replace("+name+", company.getName());
-            compCards.add(new CompanyCard(company.getId(), company.getName(), s2));
-        }
-        return new ResponseEntity<>(compCards, HttpStatus.OK);
-    }
-
-    @PostMapping("comp")
-    @ResponseBody
-    public ResponseEntity<ResultMessage> postCompany(@RequestBody Company company){
-        return new ResponseEntity<>(jamService.postCompany(company), HttpStatus.OK);
-    }
-
-    @DeleteMapping("comp/{id}")
-    @ResponseBody
-    public ResponseEntity<ResultMessage> deleteCompany( @PathVariable(value = "id") int id){
-        return new ResponseEntity<>(jamService.deleteCompany(id), HttpStatus.OK);
-    }
-
-    @PutMapping("comp")
-    @ResponseBody
-    public ResponseEntity<ResultMessage> updateCompany( @RequestBody Company company){
-        return new ResponseEntity<>(jamService.updateCompany(company), HttpStatus.OK);
-    }
 
 //*********************** Person related methods ************************************************
 @GetMapping("person")
