@@ -1,9 +1,5 @@
-package com.jam.controller;
+package com.jam.exceptions;
 
-import com.jam.exceptions.AlreadyExistsException;
-import com.jam.exceptions.NotFoundException;
-import com.jam.exceptions.GlobalErrorResponse;
-import com.jam.exceptions.UnableToPerformException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.web.bind.annotation.*;
