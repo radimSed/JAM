@@ -21,7 +21,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/JAM/api/v1/")
-public class JAMApplicationControllerV1 {
+public class JAMApplicationControllerV1 extends JAMAbstractDataController{
 
     @Autowired
     JamServiceV1 jamService;
@@ -30,17 +30,6 @@ public class JAMApplicationControllerV1 {
 
     public JAMApplicationControllerV1(){
         appCardTemplate = getResource("templates/appCard.html"); //reads template for app card
-    }
-
-    private String getResource(String res){
-        Resource resource = new ClassPathResource(res);
-        try {
-            InputStream inputStream = resource.getInputStream();
-            byte[] byteData = FileCopyUtils.copyToByteArray(inputStream);
-            return new String(byteData, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new NotFoundException(res + " not found");
-        }
     }
 
     @GetMapping("preview")
