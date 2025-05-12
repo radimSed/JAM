@@ -4,6 +4,7 @@ import com.jam.dto.Person;
 import com.jam.dto.PersonCard;
 import com.jam.dto.ResultMessage;
 import com.jam.exceptions.NotFoundException;
+import com.jam.service.JAMPersonServiceV1;
 import com.jam.service.JamServiceV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -25,11 +26,12 @@ import java.util.List;
 public class JAMPersonControllerV1 extends JAMAbstractDataController{
 
     @Autowired
-    JamServiceV1 jamService;
+    JAMPersonServiceV1 jamService;
 
     private final String personCardTemplate;
 
     public JAMPersonControllerV1(){
+        super();
         personCardTemplate = getResource("templates/personCard.html"); //reads template for person card
     }
 

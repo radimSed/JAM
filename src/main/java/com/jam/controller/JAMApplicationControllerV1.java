@@ -3,6 +3,7 @@ package com.jam.controller;
 import com.jam.JamApplication;
 import com.jam.dto.*;
 import com.jam.exceptions.NotFoundException;
+import com.jam.service.JAMApplicationServiceV1;
 import com.jam.service.JamServiceV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -24,11 +25,12 @@ import java.util.List;
 public class JAMApplicationControllerV1 extends JAMAbstractDataController{
 
     @Autowired
-    JamServiceV1 jamService;
+    JAMApplicationServiceV1 jamService;
 
     private final String appCardTemplate;
 
     public JAMApplicationControllerV1(){
+        super();
         appCardTemplate = getResource("templates/appCard.html"); //reads template for app card
     }
 

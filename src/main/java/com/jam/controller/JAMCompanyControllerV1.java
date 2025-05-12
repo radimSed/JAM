@@ -4,6 +4,7 @@ import com.jam.dto.Company;
 import com.jam.dto.CompanyCard;
 import com.jam.dto.ResultMessage;
 import com.jam.exceptions.NotFoundException;
+import com.jam.service.JAMCompanyServiceV1;
 import com.jam.service.JamServiceV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -28,11 +29,12 @@ import java.util.List;
 public class JAMCompanyControllerV1 extends JAMAbstractDataController{
 
     @Autowired
-    JamServiceV1 jamService;
+    JAMCompanyServiceV1 jamService;
 
     private final String compCardTemplate;
 
     public JAMCompanyControllerV1(){
+        super();
         compCardTemplate = getResource("templates/compCard.html"); //reads template for company card
     }
 
