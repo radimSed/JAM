@@ -47,7 +47,7 @@ public class JAMCompanyControllerV1 {
         }
     }
 
-    @GetMapping("")
+    @GetMapping
     @ResponseBody
     public ResponseEntity<List<CompanyCard>> getCompList(
             @RequestParam(value = "id") int id,
@@ -64,7 +64,7 @@ public class JAMCompanyControllerV1 {
         return new ResponseEntity<>(compCards, HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @PostMapping
     @ResponseBody
     public ResponseEntity<ResultMessage> postCompany(@RequestBody Company company){
         return new ResponseEntity<>(jamService.postCompany(company), HttpStatus.OK);
@@ -76,7 +76,7 @@ public class JAMCompanyControllerV1 {
         return new ResponseEntity<>(jamService.deleteCompany(id), HttpStatus.OK);
     }
 
-    @PutMapping("")
+    @PutMapping
     @ResponseBody
     public ResponseEntity<ResultMessage> updateCompany( @RequestBody Company company){
         return new ResponseEntity<>(jamService.updateCompany(company), HttpStatus.OK);

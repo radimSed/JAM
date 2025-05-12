@@ -24,11 +24,9 @@ public class JamControllerV1 {
     @Autowired
     JamServiceV1 jamService;
 
-    private final String personCardTemplate;
     private final String appCardTemplate;
 
     public JamControllerV1(){
-        personCardTemplate = getResource("templates/personCard.html"); //reads template for person card
         appCardTemplate = getResource("templates/appCard.html"); //reads template for app card
     }
 
@@ -70,45 +68,6 @@ public class JamControllerV1 {
 //*********************** Company related methods ************************************************
 
 //*********************** Person related methods ************************************************
-@GetMapping("person")
-@ResponseBody
-public ResponseEntity<List<PersonCard>> getPersonList(
-        @RequestParam(value = "id") int id,
-        @RequestParam(value = "name") String name,
-        @RequestParam(value = "email") String email,
-        @RequestParam(value = "phone") String phone
-){
-    List<Person> personlist = jamService.getPersons(id, name, email, phone);
-
-    List<PersonCard> personCards = new ArrayList<>();
-    for(Person person:personlist){
-        String s1 = personCardTemplate.replace("+id+", String.valueOf(person.getId()));
-        String s2 = s1.replace("+name+", person.getName());
-        String s3 = s2.replace("+email+", person.getEmail());
-        String s4 = s3.replace("+phone+", person.getPhone());
-        personCards.add(new PersonCard(person.getId(), person.getName(),
-                person.getEmail(), person.getPhone(), s4));
-    }
-    return new ResponseEntity<>(personCards, HttpStatus.OK);
-}
-
-    @PostMapping("person")
-    @ResponseBody
-    public ResponseEntity<ResultMessage> postPerson(@RequestBody Person person){
-        return new ResponseEntity<>(jamService.postPerson(person), HttpStatus.OK);
-    }
-
-    @DeleteMapping("person/{id}")
-    @ResponseBody
-    public ResponseEntity<ResultMessage> deletePerson( @PathVariable(value = "id") int id){
-        return new ResponseEntity<>(jamService.deletePerson(id), HttpStatus.OK);
-    }
-
-    @PutMapping("person")
-    @ResponseBody
-    public ResponseEntity<ResultMessage> updatePerson( @RequestBody Person person){
-        return new ResponseEntity<>(jamService.updatePerson(person), HttpStatus.OK);
-    }
 
 //*********************** Application related methods ************************************************
 @GetMapping("preview")
