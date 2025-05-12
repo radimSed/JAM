@@ -3,9 +3,9 @@ package com.jam.controller;
 import com.jam.dto.*;
 import com.jam.exceptions.NotFoundException;
 import com.jam.service.JamService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -91,7 +91,7 @@ public class JamController {
 
     @PostMapping("comp")
     @ResponseBody
-    public ResponseEntity<ResultMessage> postCompany(@RequestBody @Valid Company company){
+    public ResponseEntity<ResultMessage> postCompany(@RequestBody Company company){
         return new ResponseEntity<>(jamService.postCompany(company), HttpStatus.OK);
     }
 
@@ -103,7 +103,7 @@ public class JamController {
 
     @PutMapping("comp")
     @ResponseBody
-    public ResponseEntity<ResultMessage> updateCompany( @RequestBody @Valid Company company){
+    public ResponseEntity<ResultMessage> updateCompany( @RequestBody Company company){
         return new ResponseEntity<>(jamService.updateCompany(company), HttpStatus.OK);
     }
 
@@ -132,7 +132,7 @@ public ResponseEntity<List<PersonCard>> getPersonList(
 
     @PostMapping("person")
     @ResponseBody
-    public ResponseEntity<ResultMessage> postPerson(@RequestBody @Valid Person person){
+    public ResponseEntity<ResultMessage> postPerson(@RequestBody Person person){
         return new ResponseEntity<>(jamService.postPerson(person), HttpStatus.OK);
     }
 
@@ -144,7 +144,7 @@ public ResponseEntity<List<PersonCard>> getPersonList(
 
     @PutMapping("person")
     @ResponseBody
-    public ResponseEntity<ResultMessage> updatePerson( @RequestBody @Valid Person person){
+    public ResponseEntity<ResultMessage> updatePerson( @RequestBody Person person){
         return new ResponseEntity<>(jamService.updatePerson(person), HttpStatus.OK);
     }
 
@@ -184,13 +184,13 @@ public ResponseEntity<List<AppCard>> getPersonList(
 
     @PostMapping("app")
     @ResponseBody
-    public ResponseEntity<ResultMessage> postApplication(@RequestBody @Valid Application app){
+    public ResponseEntity<ResultMessage> postApplication(@RequestBody Application app){
         return new ResponseEntity<>(jamService.postApplication(app), HttpStatus.OK);
     }
 
     @PutMapping("app")
     @ResponseBody
-    public ResponseEntity<ResultMessage> updateApplication(@RequestBody @Valid ApplicationUpdate appUpdate){
+    public ResponseEntity<ResultMessage> updateApplication(@RequestBody ApplicationUpdate appUpdate){
         return new ResponseEntity<>(jamService.updateApplication(appUpdate), HttpStatus.OK);
     }
 

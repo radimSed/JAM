@@ -7,10 +7,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.criteria.*;
+import jakarta.transaction.Transaction;
+import net.bytebuddy.TypeCache;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +23,7 @@ import static jakarta.persistence.Persistence.createEntityManagerFactory;
 @Service
 public class JamService {
     private final String UNKNOWN = "Unknown";
-    private final int AUTOCLOSE_DAYS = 30;
+    private final int AUTOCLOSEDAYS = 30;
 
     private EntityManagerFactory entityManagerFactory;
 
@@ -43,7 +47,7 @@ public class JamService {
      * to "Autoclosed" state
      */
     private void setAutocloseDate(){
-        LocalDateTime date = LocalDateTime.now().minusDays(AUTOCLOSE_DAYS);
+        LocalDateTime date = LocalDateTime.now().minusDays(AUTOCLOSEDAYS);
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
 
