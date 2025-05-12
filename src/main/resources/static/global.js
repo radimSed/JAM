@@ -1,5 +1,5 @@
 const globalPath = "http://localhost:8080";
-export const pathToServer = `${globalPath}/JAM/`;
+export const pathToServer = `${globalPath}/JAM/api/v1/`;
 export const pathToShutDown = `${globalPath}/actuator/shutdown`;
 
 /**

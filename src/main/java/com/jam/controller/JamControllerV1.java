@@ -2,10 +2,8 @@ package com.jam.controller;
 
 import com.jam.dto.*;
 import com.jam.exceptions.NotFoundException;
-import com.jam.service.JamService;
+import com.jam.service.JamServiceV1;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -20,17 +18,17 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/JAM/")
-public class JamController {
+@RequestMapping(value = "/JAM/api/v1/")
+public class JamControllerV1 {
 
     @Autowired
-    JamService jamService;
+    JamServiceV1 jamService;
 
     private final String compCardTemplate;
     private final String personCardTemplate;
     private final String appCardTemplate;
 
-    public JamController(){
+    public JamControllerV1(){
         compCardTemplate = getResource("templates/compCard.html"); //reads template for company card
         personCardTemplate = getResource("templates/personCard.html"); //reads template for person card
         appCardTemplate = getResource("templates/appCard.html"); //reads template for app card

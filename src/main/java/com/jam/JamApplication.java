@@ -9,7 +9,7 @@ import java.io.IOException;
 @SpringBootApplication
 public class JamApplication {
 
-	private static final String URL = "http://localhost:8080/JAM/";
+	private static final String URL = "http://localhost:8080/JAM/api/v1/";
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx = SpringApplication.run(JamApplication.class, args);

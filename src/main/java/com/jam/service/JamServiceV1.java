@@ -7,27 +7,23 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.criteria.*;
-import jakarta.transaction.Transaction;
-import net.bytebuddy.TypeCache;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
 import static jakarta.persistence.Persistence.createEntityManagerFactory;
 
 @Service
-public class JamService {
+public class JamServiceV1 {
     private final String UNKNOWN = "Unknown";
     private final int AUTOCLOSEDAYS = 30;
 
     private EntityManagerFactory entityManagerFactory;
 
-    JamService(){
+    JamServiceV1(){
         // an EntityManagerFactory is set up once for an application
         // IMPORTANT: notice how the name here matches the name we
         // gave the persistence-unit in persistence.xml
