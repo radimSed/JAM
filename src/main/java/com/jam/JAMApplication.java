@@ -7,12 +7,12 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.io.IOException;
 
 @SpringBootApplication
-public class JamApplication {
+public class JAMApplication {
 
 	private static final String URL = "http://localhost:8080/JAM/api/v1/";
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext ctx = SpringApplication.run(JamApplication.class, args);
+		ConfigurableApplicationContext ctx = SpringApplication.run(JAMApplication.class, args);
 
 		String browser = ctx.getEnvironment().getProperty("browser");
 		String incognito = ctx.getEnvironment().getProperty("incognito.parameter");

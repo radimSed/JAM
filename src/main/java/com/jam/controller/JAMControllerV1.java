@@ -2,7 +2,7 @@ package com.jam.controller;
 
 import com.jam.dto.*;
 import com.jam.exceptions.NotFoundException;
-import com.jam.service.JamServiceV1;
+import com.jam.service.JAMServiceV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -13,18 +13,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/JAM/api/v1/")
-public class JamControllerV1 {
+public class JAMControllerV1 {
 
     @Autowired
-    JamServiceV1 jamService;
+    JAMServiceV1 jamService;
 
-    public JamControllerV1(){
+    public JAMControllerV1(){
     }
 
     @GetMapping("test")

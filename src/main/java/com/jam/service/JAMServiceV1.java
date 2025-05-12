@@ -1,26 +1,23 @@
 package com.jam.service;
 
 import com.jam.dto.*;
-import com.jam.exceptions.AlreadyExistsException;
 import com.jam.exceptions.UnableToPerformException;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.criteria.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import static jakarta.persistence.Persistence.createEntityManagerFactory;
 
 @Service
-public class JamServiceV1 extends JAMAbstractServiceV1{
+public class JAMServiceV1 extends JAMAbstractServiceV1{
     private final int AUTOCLOSEDAYS = 30;
 
-    JamServiceV1(){
+    JAMServiceV1(){
         super();
         setAutocloseDate();
     }

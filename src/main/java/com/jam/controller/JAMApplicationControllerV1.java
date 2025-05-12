@@ -1,21 +1,12 @@
 package com.jam.controller;
 
-import com.jam.JamApplication;
 import com.jam.dto.*;
-import com.jam.exceptions.NotFoundException;
 import com.jam.service.JAMApplicationServiceV1;
-import com.jam.service.JamServiceV1;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
