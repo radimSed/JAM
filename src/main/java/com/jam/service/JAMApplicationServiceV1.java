@@ -20,11 +20,6 @@ public class JAMApplicationServiceV1{
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
-    /*
-    public JAMApplicationServiceV1(EntityManagerFactory entityManagerFactory){
-        this.entityManagerFactory = entityManagerFactory;
-    }
-*/
     public List<AppPreview> getPreview(int id, String title, String posId, String compName, String persName, String status){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
@@ -35,7 +30,7 @@ public class JAMApplicationServiceV1{
 
         List<Predicate> predicates = new ArrayList<>();
         if(id != 0) {
-            Predicate idLike = builder.like(root.<Integer>get(AppPreview_.id).as(String.class), "%" + id + "%");
+            Predicate idLike = builder.like(root.get(AppPreview_.id).as(String.class), "%" + id + "%");
             predicates.add(idLike);
         }
         if (!title.isEmpty()) {
@@ -81,10 +76,8 @@ public class JAMApplicationServiceV1{
 
         List<Records> records = entityManager.createQuery(criteria).getResultList();
 
-        ApplicationDetail appDetail = new ApplicationDetail(app.getApplicationId(), app.getPositionTitle(), app.getPositionId(),
+        return new ApplicationDetail(app.getApplicationId(), app.getPositionTitle(), app.getPositionId(),
                 app.getStartDate(), app.getLastInteractionDate(), app.getStatusId(), pers, comp, processRecords(records));
-
-        return appDetail;
     }
 
     private String processRecords(List<Records> records){
@@ -151,10 +144,10 @@ public class JAMApplicationServiceV1{
 
         criteria.where(predicates.toArray(new Predicate[]{}));
 
-        List<Application> appList = (List<Application>) em.createQuery(criteria).getResultList();
+        List<Application> appList = em.createQuery(criteria).getResultList();
 
         if(!appList.isEmpty()){
-            return appList.get(appList.size()-1);
+            return appList.getLast();
         } else {
             return null;
         }

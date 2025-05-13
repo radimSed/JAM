@@ -10,7 +10,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.criteria.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,11 +22,6 @@ public class JAMCompanyServiceV1{
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
-    /*
-    public JAMCompanyServiceV1(EntityManagerFactory entityManagerFactory){
-        this.entityManagerFactory = entityManagerFactory;
-    }
-*/
     public ResultMessage postCompany(Company company){
         Company retCompany;
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -70,10 +64,10 @@ public class JAMCompanyServiceV1{
         criteria.where(builder.equal(root.get(Company_.name), company.getName()));
 
         //check usage of the company name first to ensure there is only one company of the name
-        List<Company> compList = (List<Company>) em.createQuery(criteria).getResultList();
+        List<Company> compList = em.createQuery(criteria).getResultList();
 
         if(!compList.isEmpty()){
-            return compList.get(0);
+            return compList.getFirst();
         } else {
             return null;
         }
@@ -89,7 +83,7 @@ public class JAMCompanyServiceV1{
 
         List<Predicate> predicates = new ArrayList<>();
         if(id != 0) {
-            Predicate idLike = builder.like(root.<Integer>get(Company_.id).as(String.class), "%" + id + "%");
+            Predicate idLike = builder.like(root.get(Company_.id).as(String.class), "%" + id + "%");
             predicates.add(idLike);
         }
         if (!name.isEmpty()) {
@@ -110,7 +104,6 @@ public class JAMCompanyServiceV1{
         //set the root class
         Root<Company> root = delete.from(Company.class);
         //setup update where clause
-        //delete.where(builder.equal(root.get("id"), id));
         delete.where(builder.equal(root.get(Company_.id), id));
 
         EntityTransaction transaction = entityManager.getTransaction();

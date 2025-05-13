@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.JAM</groupId>
 	<artifactId>JAM</artifactId>
-	<version>1.1.1</version>
+	<version>1.1.2</version>
 	<name>JAM</name>
 	<description>JobApplicationManagement</description>
 	<url/>

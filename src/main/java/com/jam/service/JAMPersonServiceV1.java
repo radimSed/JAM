@@ -1,6 +1,5 @@
 package com.jam.service;
 
-import com.jam.controller.JAMPersonControllerV1;
 import com.jam.dto.Person;
 import com.jam.dto.Person_;
 import com.jam.dto.ResultMessage;
@@ -23,11 +22,6 @@ public class JAMPersonServiceV1{
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
-    /*
-    public JAMPersonServiceV1(EntityManagerFactory entityManagerFactory){
-        this.entityManagerFactory = entityManagerFactory;
-    }
-*/
     public List<Person> getPersons(int id, String name, String email, String phone){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
@@ -115,10 +109,10 @@ public class JAMPersonServiceV1{
         criteria.where(predicates.toArray(new Predicate[]{}));
 
         //check usage of the person data first to ensure there is only one person of the same data
-        List<Person> personList = (List<Person>) em.createQuery(criteria).getResultList();
+        List<Person> personList = em.createQuery(criteria).getResultList();
 
         if(!personList.isEmpty()){
-            return personList.get(0);
+            return personList.getFirst();
         } else {
             return null;
         }

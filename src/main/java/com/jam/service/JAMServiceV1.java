@@ -1,20 +1,14 @@
 package com.jam.service;
 
-import com.jam.dto.*;
 import com.jam.exceptions.UnableToPerformException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.criteria.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Map;
-
-import static jakarta.persistence.Persistence.createEntityManagerFactory;
 
 @Service
 public class JAMServiceV1{
@@ -37,7 +31,7 @@ public class JAMServiceV1{
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
 
-        int updateCount = 0;
+        int updateCount;
         try {
             transaction.begin();
             updateCount = entityManager.createQuery("""
@@ -59,7 +53,7 @@ public class JAMServiceV1{
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new UnableToPerformException("Unable to perform autoclosure");
+            throw new UnableToPerformException("Unable to perform auto-closure");
         } finally {
             entityManager.close();
         }

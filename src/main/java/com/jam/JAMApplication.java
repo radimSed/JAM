@@ -17,19 +17,28 @@ public class JAMApplication {
 		String browser = ctx.getEnvironment().getProperty("browser");
 		String incognito = ctx.getEnvironment().getProperty("incognito.parameter");
 
+		String[] commands = new String[3];
 		Runtime runtime = Runtime.getRuntime();
 		try {
 			if(browser.toLowerCase().contains("chrome")){ //if chrome is set
-				runtime.exec(browser + " " + URL + " " + incognito);
+				commands[0] = browser;
+				commands[1] = URL;
+				commands[2] = incognito;
+				runtime.exec(commands);
 			} else if(browser.toLowerCase().contains("firefox")) { //if firefox is set
-				runtime.exec(browser + " " + incognito + " " + URL);
+				commands[0] = browser;
+				commands[1] = incognito;
+				commands[2] = URL;
+				runtime.exec(commands);
 			} else {
 				System.err.println("**************************************************************************************************");
 				System.err.println("* Unable to run browser. Run it manually and enter address " + URL + ". *");
 				System.err.println("**************************************************************************************************");
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException | NullPointerException e) {
+			System.err.println("**************************************************************************************************");
+			System.err.println("* " + e.getMessage() + " *");
+			System.err.println("**************************************************************************************************");
 		}
 
 	}
