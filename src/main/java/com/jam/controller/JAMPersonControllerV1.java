@@ -20,11 +20,9 @@ public class JAMPersonControllerV1 extends JAMAbstractDataController{
     @Autowired
     JAMPersonServiceV1 jamService;
 
-    private final String personCardTemplate;
-
     public JAMPersonControllerV1(){
         super();
-        personCardTemplate = getResource("templates/personCard.html"); //reads template for person card
+        getResource("templates/personCard.html"); //reads template for person card
     }
 
     @GetMapping
@@ -39,7 +37,7 @@ public class JAMPersonControllerV1 extends JAMAbstractDataController{
 
         List<PersonCard> personCards = new ArrayList<>();
         for(Person person:personlist){
-            String s1 = personCardTemplate.replace("+id+", String.valueOf(person.getId()));
+            String s1 = cardTemplate.replace("+id+", String.valueOf(person.getId()));
             String s2 = s1.replace("+name+", person.getName());
             String s3 = s2.replace("+email+", person.getEmail());
             String s4 = s3.replace("+phone+", person.getPhone());

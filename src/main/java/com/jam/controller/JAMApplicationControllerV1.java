@@ -18,11 +18,9 @@ public class JAMApplicationControllerV1 extends JAMAbstractDataController{
     @Autowired
     JAMApplicationServiceV1 jamService;
 
-    private final String appCardTemplate;
-
     public JAMApplicationControllerV1(){
         super();
-        appCardTemplate = getResource("templates/appCard.html"); //reads template for app card
+        getResource("templates/appCard.html"); //reads template for app card
     }
 
     @GetMapping("preview")
@@ -40,7 +38,7 @@ public class JAMApplicationControllerV1 extends JAMAbstractDataController{
 
         List<AppCard> appCards = new ArrayList<>();
         for(AppPreview preview:previewlist){
-            String s1 = appCardTemplate.replace("+id+", String.valueOf(preview.getId()));
+            String s1 = cardTemplate.replace("+id+", String.valueOf(preview.getId()));
             String s2 = s1.replace("+title+", preview.getTitle());
             String s3 = s2.replace("+positionId+", preview.getPositionId());
             String s4 = s3.replace("+compName+", preview.getCompanyName());

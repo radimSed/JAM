@@ -23,11 +23,9 @@ public class JAMCompanyControllerV1 extends JAMAbstractDataController{
     @Autowired
     JAMCompanyServiceV1 jamService;
 
-    private final String compCardTemplate;
-
     public JAMCompanyControllerV1(){
         super();
-        compCardTemplate = getResource("templates/compCard.html"); //reads template for company card
+        getResource("templates/compCard.html"); //reads template for company card
     }
 
     @GetMapping
@@ -40,7 +38,7 @@ public class JAMCompanyControllerV1 extends JAMAbstractDataController{
 
         List<CompanyCard> compCards = new ArrayList<>();
         for(Company company:complist){
-            String s1 = compCardTemplate.replace("+id+", String.valueOf(company.getId()));
+            String s1 = cardTemplate.replace("+id+", String.valueOf(company.getId()));
             String s2 = s1.replace("+name+", company.getName());
             compCards.add(new CompanyCard(company.getId(), company.getName(), s2));
         }

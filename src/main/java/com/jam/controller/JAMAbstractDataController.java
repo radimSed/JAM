@@ -10,12 +10,15 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 abstract public class JAMAbstractDataController {
-    protected String getResource(String res){
+
+    protected String cardTemplate;
+
+    protected void getResource(String res){
         Resource resource = new ClassPathResource(res);
         try {
             InputStream inputStream = resource.getInputStream();
             byte[] byteData = FileCopyUtils.copyToByteArray(inputStream);
-            return new String(byteData, StandardCharsets.UTF_8);
+            cardTemplate = new String(byteData, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new NotFoundException(res + " not found");
         }
