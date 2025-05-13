@@ -1,13 +1,18 @@
 package com.jam.service;
 
+import com.jam.dto.StatusValue;
 import com.jam.exceptions.UnableToPerformException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -72,5 +77,16 @@ public class JAMServiceV1{
             retString += "<br>Database available at " + info1 + " with UnitName " + info2;
         }
         return retString;
+    }
+
+    public List<StatusValue> getStatusList(){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<StatusValue> criteria = builder.createQuery(StatusValue.class);
+        Root<StatusValue> root = criteria.from(StatusValue.class);
+        criteria.select(root);
+
+        return entityManager.createQuery(criteria).getResultList();
     }
 }
