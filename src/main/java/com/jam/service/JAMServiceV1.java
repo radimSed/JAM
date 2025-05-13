@@ -3,8 +3,11 @@ package com.jam.service;
 import com.jam.dto.*;
 import com.jam.exceptions.UnableToPerformException;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.criteria.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,16 +17,19 @@ import java.util.Map;
 import static jakarta.persistence.Persistence.createEntityManagerFactory;
 
 @Service
-public class JAMServiceV1 extends JAMAbstractServiceV1{
+public class JAMServiceV1{
     private final int AUTOCLOSEDAYS = 30;
 
-    JAMServiceV1(){
-        super();
+    private final EntityManagerFactory entityManagerFactory;
+
+    public JAMServiceV1(    @Autowired
+                            EntityManagerFactory entityManagerFactory){
+        this.entityManagerFactory = entityManagerFactory;
         setAutocloseDate();
     }
 
     /**
-     * sets all application with "Open" status and "lastInteractionDate" older then AUTOCLOSEDAYS days
+     * sets all application with "Open" status and "lastInteractionDate" older than AUTOCLOSEDAYS days
      * to "Autoclosed" state
      */
     private void setAutocloseDate(){
@@ -72,16 +78,5 @@ public class JAMServiceV1 extends JAMAbstractServiceV1{
             retString += "<br>Database available at " + info1 + " with UnitName " + info2;
         }
         return retString;
-    }
-
-    public List<StatusValue> getStatusList(){
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<StatusValue> criteria = builder.createQuery(StatusValue.class);
-        Root<StatusValue> root = criteria.from(StatusValue.class);
-        criteria.select(root);
-
-        return entityManager.createQuery(criteria).getResultList();
     }
 }

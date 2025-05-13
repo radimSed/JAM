@@ -9,18 +9,25 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.criteria.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class JAMCompanyServiceV1 extends JAMAbstractServiceV1{
+public class JAMCompanyServiceV1{
+    private final String UNKNOWN = "Unknown";
 
-    public JAMCompanyServiceV1(){
-        super();
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
+
+    /*
+    public JAMCompanyServiceV1(EntityManagerFactory entityManagerFactory){
+        this.entityManagerFactory = entityManagerFactory;
     }
-
+*/
     public ResultMessage postCompany(Company company){
         Company retCompany;
         EntityManager entityManager = entityManagerFactory.createEntityManager();

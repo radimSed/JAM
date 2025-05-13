@@ -1,6 +1,5 @@
 package com.jam.controller;
 
-import com.jam.dto.*;
 import com.jam.exceptions.NotFoundException;
 import com.jam.service.JAMServiceV1;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -48,12 +46,5 @@ public class JAMControllerV1 {
         } catch (IOException e) {
             throw new NotFoundException("index.html not found");
         }
-    }
-
-    @GetMapping("status")
-    @ResponseBody
-    public ResponseEntity<List<StatusValue>> getStatusList(){
-        List<StatusValue> statusList = jamService.getStatusList();
-        return new ResponseEntity<>(statusList, HttpStatus.OK);
     }
 }

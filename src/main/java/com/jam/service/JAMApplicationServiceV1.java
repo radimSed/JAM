@@ -3,8 +3,10 @@ package com.jam.service;
 import com.jam.dto.*;
 import com.jam.exceptions.UnableToPerformException;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.criteria.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -12,12 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class JAMApplicationServiceV1 extends JAMAbstractServiceV1{
+public class JAMApplicationServiceV1{
+    private final String UNKNOWN = "Unknown";
 
-    public JAMApplicationServiceV1(){
-        super();
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
+
+    /*
+    public JAMApplicationServiceV1(EntityManagerFactory entityManagerFactory){
+        this.entityManagerFactory = entityManagerFactory;
     }
-
+*/
     public List<AppPreview> getPreview(int id, String title, String posId, String compName, String persName, String status){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 

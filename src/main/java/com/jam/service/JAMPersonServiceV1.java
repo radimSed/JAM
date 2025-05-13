@@ -7,19 +7,27 @@ import com.jam.dto.ResultMessage;
 import com.jam.exceptions.AlreadyExistsException;
 import com.jam.exceptions.UnableToPerformException;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.criteria.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class JAMPersonServiceV1 extends JAMAbstractServiceV1{
-    public JAMPersonServiceV1(){
-        super();
-    }
+public class JAMPersonServiceV1{
+    private final String UNKNOWN = "Unknown";
 
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
+
+    /*
+    public JAMPersonServiceV1(EntityManagerFactory entityManagerFactory){
+        this.entityManagerFactory = entityManagerFactory;
+    }
+*/
     public List<Person> getPersons(int id, String name, String email, String phone){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
